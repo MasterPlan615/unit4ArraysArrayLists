@@ -34,6 +34,38 @@ public class ArrayMethods
     }
     public void replaceLarger()
     {
-        //...
+        for( int i = 1; i < values.length - 1; i++)
+        {
+            if(values[(i+1)] > (values[(i-1)]))
+            {
+                values[i] = values[(i+1)];
+            }
+            else if(values[(i+1)] < values[(i-1)])
+            {
+                values[i] = values[(i-1)];
+            }
+            else
+            {
+                values[i] = values[(i+1)];
+            }
+        }
+    }
+    public void removeMiddle()
+    {
+        if(values.length%2 == 0)
+        {
+            for( int i = values.length - 1; i >= ((values.length/2) - 1); i--)
+            {
+                values[i] = values[i - 1];
+            }
+        }
+        else if(values.length%3 == 0)
+        {
+            int[] newValues = new int[(values.length - 1)];
+            for( int i = 0; i < values.length - 1; i++)
+            {
+                newValues[i] = values[i];
+            }
+        }
     }
 }
