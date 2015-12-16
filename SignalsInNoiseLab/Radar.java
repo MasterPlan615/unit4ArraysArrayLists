@@ -33,8 +33,8 @@ public class Radar
      */
     public Radar(int rows, int cols)
     {
-        this.currentScan = new boolean[rows][cols];
-        this.accumulator = new int[rows][cols];
+        currentScan = new boolean[rows][cols];
+        accumulator = new int[rows][cols];
         
         // randomly set the location of the monster (can be explicity set through the
         //  setMonsterLocation method for the unit test
@@ -57,28 +57,29 @@ public class Radar
         //    3. inject noise into the grid
         //    4. update the accumulator 2D array based on the state of the currentScan 2D array
         //    5. increment the numScans instance variable
-        for(int i = 0; i < this.currentScan.length; i++)
+        for(int i = 0; i < currentScan.length; i++)
         {
-            for(int j = 0; j < this.currentScan[i].length; i++)
+            for(int j = 0; j < currentScan[i].length; j++)
             {
-                this.currentScan[i][j] = false;
+                currentScan[i][j] = false;
             }
         }
         
-        this.setMonsterLocation(monsterLocationRow,monsterLocationCol);
+        currentScan[monsterLocationRow][monsterLocationCol] = true;
+        injectNoise();
         
-        for(int i = 0; i < this.currentScan.length; i++)
+        for(int i = 0; i < currentScan.length; i++)
         {
-            for(int j = 0; j < this.currentScan[i].length; i++)
+            for(int j = 0; j < currentScan[i].length; j++)
             {
-                if(this.currentScan[i][j] == true)
+                if(currentScan[i][j] == true)
                 {
-                    this.accumulator[i][j] += 1;
+                    accumulator[i][j] += 1;
                 }
             }
         }
         
-        this.numScans += 1;
+        numScans += 1;
     }
 
     /**
@@ -171,13 +172,13 @@ public class Radar
      */
     private void injectNoise()
     {
-        for(int i = 0; i < this.currentScan.length; i++)
+        for(int i = 0; i < currentScan.length; i++)
         {
-            for(int j = 0; j < this.currentScan[i].length; i++)
+            for(int j = 0; j < currentScan[i].length; j++)
             {
-                if((Math.random() * this.noiseFraction) > this.noiseFraction)
+                if(Math.random() < noiseFraction)
                 {
-                    this.currentScan[i][j] = true;
+                    currentScan[i][j] = true;
                 }
             }
         }
